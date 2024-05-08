@@ -1,4 +1,6 @@
 const url = "https://striveschool-api.herokuapp.com/api/product/"; // definisco l'url dell'API
+// definisco la variabile tokenAPI in modo da non dover copiare l'intero codice ogni volta
+const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`
 
 
  // verifica che il contenuto del DOM sia completamente caricato prima di eseguire la funzione.
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const response = await fetch(url, { 
           // Imposto nell'headers l'autorizzazione passandogli il token.
           headers: {
-              'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`
+              'Authorization': `Bearer ${tokenAPI}`
           }
       });
       // converto la risposta in JSON
@@ -29,11 +31,38 @@ document.addEventListener("DOMContentLoaded", function() {
           headers: { 
               'Content-Type': 'application/json', // Specifico che il tipo di contenuto inviato è JSON.
               // Inserisco il token di autorizzazione.
-              'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`
+              'Authorization': `Bearer ${tokenAPI}`
           },
           body: JSON.stringify(newItem) // Converto l'oggetto newItem in una stringa JSON e lo imposta come corpo della richiesta.
       });
+
+      if (response.ok) { // Verifico se la richiesta è stata eseguita con successo.
+        clearFormFields(); // se l'elemento è stato creato con successo, parte la funzione per pulire i campi del form.
+        displaySuccessMessage(); // Funzione per mostrare il messaggio di successo.
+      }
+
       return response.json(); // Restituisce l'elemento creato
+  }
+
+  // creo la funzione per pulire i campi del form una volta creato l'elemento correttamente
+  function clearFormFields() {
+    document.getElementById('name').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('brand').value = '';
+    document.getElementById('item-img').value = '';
+    document.getElementById('price').value = '';
+  }
+
+  // creo la funzione per visualizzare un messaggio di successo una volta creato l'elemento
+  function displaySuccessMessage() {
+    const successMsg = document.getElementById('success-message'); // punto l'elemento HTML id="success-message"
+    successMsg.textContent = "Prodotto Inserito Correttamente!"; // Imposto il messaggio di successo.
+    successMsg.style.display = 'block'; // Mostra il messaggio.
+  
+    // Nascondo il messaggio dopo 3 secondi
+    setTimeout(() => {
+        successMsg.style.display = 'none';
+    }, 3000);
   }
 
   // creo una funzione asincrona che accetta come parametro `itemId`, ovvero l'id dell'elemento da eliminare.
@@ -42,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const response = await fetch(url + itemId, { // `await` è usato per attendere che la promise restituita da fetch sia risolta prima di procedere.
         method: 'DELETE', // Imposto il metodo HTTP della richiesta a 'DELETE', indicando che l'operazione desiderata è l'eliminazione di un elemento.
         headers: { // Imposto gli headers della richiesta. In questo caso, include un header 'Authorization' per l'autenticazione,
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`
+            'Authorization': `Bearer ${tokenAPI}`
         }
     });
     // Controllo se la risposta HTTP ha avuto successo (cioè, stato HTTP 200-299).
@@ -72,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`
+        'Authorization': `Bearer ${tokenAPI}`
       },
       body: JSON.stringify(updatedItem)
     });
@@ -119,28 +148,40 @@ document.addEventListener("DOMContentLoaded", function() {
         const itemCard = document.createElement('div'); // Creo un nuovo elemento div.
         itemCard.className = 'item-card'; // Assegno le classi al nuovo div.
 
+        const itemTitle = document.createElement(`div`)
+        itemTitle.className = `item-title`
+        itemCard.appendChild(itemTitle)
+        
+        const itemInfo = document.createElement(`div`)
+        itemInfo.className = `item-info`
+        itemCard.appendChild(itemInfo)
+
+        const itemButtons = document.createElement(`div`)
+        itemButtons.className = `item-btns`
+        itemCard.appendChild(itemButtons)
+
         // creo gli elementi che popoleranno la card
         const title = document.createElement('h6');
         title.textContent = item.name;
-        itemCard.appendChild(title);
+        itemTitle.appendChild(title);
         
         const image = document.createElement('img');
         image.src = item.imageUrl;
         image.alt = item.name;
         image.className = "bo-itemimg"
-        itemCard.appendChild(image);
+        itemTitle.appendChild(image);
 
         const description = document.createElement('p');
         description.textContent = "Descrizione: " + item.description;
-        itemCard.appendChild(description);
+        itemInfo.appendChild(description);
 
         const brand = document.createElement('p');
         brand.textContent = "Brand: " + item.brand;
-        itemCard.appendChild(brand);
+        itemInfo.appendChild(brand);
 
         const price = document.createElement('p');
         price.textContent = "Prezzo: € " + item.price;
-        itemCard.appendChild(price);
+        itemInfo.appendChild(price);
 
 
         // Aggiungo il bottone di modifica
@@ -152,16 +193,16 @@ document.addEventListener("DOMContentLoaded", function() {
         editButton.onclick = function() { // Aggiungo un gestore evento onclick al bottone che chiama la funzione fillModal, passando le info dell'item corrente.
           fillModal(item);
         };
-        itemCard.appendChild(editButton); // Aggiungo il bottone di modifica al div itemCard.
+        itemButtons.appendChild(editButton); // Aggiungo il bottone di modifica al div itemCard.
 
         // Aggiungo il bottone di eliminazione
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Elimina'; 
         deleteButton.className = 'btn delete-btn'; // assegno le classi al bottone
         deleteButton.onclick = function() { 
-            deleteItem(item._id); // Assumendo che ogni item abbia un campo _id
+            deleteItem(item._id); // prendo come riferimento l'id dell'item selezionato
         };
-        itemCard.appendChild(deleteButton); // Aggiungo il bottone Elimina al div itemCard.
+        itemButtons.appendChild(deleteButton); // Aggiungo il bottone Elimina al div itemCard.
 
 
 
@@ -178,9 +219,9 @@ document.addEventListener("DOMContentLoaded", function() {
       const price = document.getElementById('price').value;
       const createdItem = await createItem(name, description, brand, imageUrl, price);
       console.log('Elemento creato:', createdItem);
-      fetchItems(); // Aggiorna la lista degli elementi
+      fetchItems(); // Aggiorno la lista degli elementi
   });
 
-  fetchItems(); // Carica gli elementi esistenti all'avvio
+  fetchItems(); // Carico gli elementi esistenti all'avvio
 });
 

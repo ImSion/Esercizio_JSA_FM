@@ -59,8 +59,8 @@
         <div class="container">
 
             <!-- contenitore per il form di creazione oggetto -->
-            <div id="Create-Item" class="row">
-                <h2>Inserisci un nuovo oggetto</h2>
+            <div id="Create-Item" class="row text-center mt-3  ">
+                <h2>Inserisci un nuovo prodotto</h2>
 
                 <!-- form per creazione oggetto -->
                 <form id="items-form">
@@ -71,22 +71,23 @@
                     <label for="description">Descrizione</label>
                     <input id="description" type="text" required>
                     <!-- brand oggetto -->
-                    <label for="brand">brand</label>
+                    <label for="brand">Brand</label>
                     <input id="brand" type="text" required>
                     <!-- Immagine oggetto -->
                     <label for="immagine">Immagine(URL)</label>
                     <input id="item-img" type="url" required>
                     <!-- prezzo oggetto -->
-                    <label for="prezzo">prezzo</label>
+                    <label for="prezzo">Prezzo</label>
                     <input id="price" type="text" required>
-                    <button type="submit">Aggiungi +</button>
+                    <button class="submitbtn" type="submit">Aggiungi +</button>
+                    <div id="success-message" style="display:none;"></div>
                 </form>                
             </div>
           </div>
 
-            <div id="bo-list-items" class="container-fluid ">
+            <div id="bo-list-items" class="container-fluid text-center ">
                 <h2>Lista oggetti</h2>
-                <div id="bo-items-cards" class="d-flex row flex-column alignse">
+                <div id="bo-items-cards" class="d-flex row flex-column align-items-center ">
                     
                 </div>               
             </div>
@@ -115,8 +116,7 @@
               </div>
             </div>
           </div>
-
-        
+   
     </main>
 
 
@@ -124,5 +124,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- link allo script -->
     <script src="backoffice.js"></script>
+
+
 </body>
 </html>

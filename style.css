@@ -6,13 +6,51 @@
 
 
 
+/* stilizzo i campi di input di creazione oggetto */
+#items-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+#items-form label {
+    background-color: rgb(0, 166, 255);
+    border: 6px solid rgb(0, 166, 255);
+    margin-bottom: 2px;
+    border-radius: 10px;
+ }
+#items-form input {
+    width: 70%;
+    height: 50px; 
+    margin-bottom: 10px;
+    border: 3px solid rgb(69, 69, 69);
+    border-radius: 12px;
+}
+#success-message {
+    font-size: 30px;
+}
 
+.submitbtn {
+    width: 170px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 10px;
+    background-color: greenyellow;
+    border: 1px solid greenyellow;
+    transition: 0.5s ease-in-out;
+}
+.submitbtn:hover {
+    transform: scale(1.07);
+    font-weight: 600;
+    box-shadow: 0px 0px 10px greenyellow;
+}
 
 #bo-list-items {
     padding: 30px;
 }
+
+/* stilizzo la card degli elementi creati */
 .item-card {
-    width: 100%;
+    width: 95%;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
@@ -25,9 +63,28 @@
     transform: scale(1.02);
 }
 
+/* stilizzo i 3 div all'interno di itemcard */
+.item-title {
+    display: flex;
+    align-items: center;
+}
+.item-info {
+    display: flex;
+    align-items: center;
+}
+.item-btns {
+    display: flex;
+    align-items: center;
+}
+.item-title h6 {
+    width: 120px;
+}
+
+/* stilizzo l'immagine dei prodotti */
 .bo-itemimg {
     width: 40px;
     margin: 4px;
+    border-radius: 8px;
 }
 
 .item-card p, h6 {
@@ -35,10 +92,12 @@
     margin-right: 10px;
 }
 
+/* stilizzo i bottoni "modifica" e "elimina" */
 .edit-btn {
     border: 1px solid rgb(0, 85, 255);
     transition: 0.3s ease-in-out;
     border-radius: 15px;
+    margin-right: 8px;
 }
 .edit-btn:hover {
     color: white;

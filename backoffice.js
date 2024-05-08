@@ -5,6 +5,25 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
 
   // verifica che il contenuto del DOM sia completamente caricato prima di eseguire la funzione.
   document.addEventListener("DOMContentLoaded", function() {
+  
+  // Definisco l'elemento del bottone collapse e l'icona
+  const collapseButton = document.querySelector('.colapse-btn');
+  const collapseIcon = collapseButton.querySelector('i');
+
+  // Gestisco l'evento di apertura del collapse
+  const formCollapse = document.getElementById('createForm');
+  formCollapse.addEventListener('show.bs.collapse', function () {
+    collapseIcon.classList.remove('bi-plus-lg');
+    collapseIcon.classList.add('bi-dash');
+  });
+
+  // Gestisco l'evento di chiusura del collapse
+  formCollapse.addEventListener('hide.bs.collapse', function () {
+    collapseIcon.classList.remove('bi-dash');
+    collapseIcon.classList.add('bi-plus-lg');
+  });
+  
+  // Da qui inizia la logica di funzione del backoffice
   const form = document.getElementById('items-form'); //riferimento al form HTML con ID 'items-form'.
   const itemsContainer = document.getElementById('bo-items-cards');// riferimento al div con ID 'bo-items-cards' che verrà usato per visualizzare gli oggetti creati.
 
@@ -86,8 +105,6 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
         successMsg.style.display = 'none';
     }, 3000);
   }
-
-
 
   // creo una funzione asincrona che accetta come parametro `itemId`, ovvero l'id dell'elemento da eliminare.
   async function deleteItem(itemId) {
@@ -198,9 +215,25 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
         image.className = "bo-itemimg"
         itemTitle.appendChild(image);
 
+        const dropdown = document.createElement('div');
+        dropdown.className = 'dropdown';
+        itemInfo.appendChild(dropdown);
+    
+        const dropButton = document.createElement('button');
+        dropButton.className = 'btn btn-sm btn-link ';
+        dropButton.setAttribute('data-bs-toggle', 'dropdown');
+        dropButton.setAttribute('aria-expanded', 'false');
+        dropButton.textContent = 'Descrizione';
+        dropdown.appendChild(dropButton);
+    
+        const dropdownMenu = document.createElement('div');
+        dropdownMenu.className = 'dropdown-menu';
+        dropdown.appendChild(dropdownMenu);
+    
         const description = document.createElement('p');
-        description.textContent = "Descrizione: " + item.description;
-        itemInfo.appendChild(description);
+        description.className = 'dropdown-item-text';
+        description.textContent = item.description;
+        dropdownMenu.appendChild(description);
 
         const brand = document.createElement('p');
         brand.textContent = "Brand: " + item.brand;
@@ -249,6 +282,8 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
       fetchItems(); // Aggiorno la lista degli elementi
   });
 
+  
   fetchItems(); // Carico gli elementi esistenti all'avvio
 });
+
 

@@ -15,7 +15,7 @@
 #items-form label {
     background-color: rgb(0, 166, 255);
     border: 6px solid rgb(0, 166, 255);
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     border-radius: 10px;
  }
 #items-form input {
@@ -24,8 +24,12 @@
     margin-bottom: 10px;
     border: 3px solid rgb(69, 69, 69);
     border-radius: 12px;
+    transition: 0.5s ease-in-out;
 }
-#success-message {
+#items-form input:hover {
+    box-shadow: 0px 0px 10px black;
+}
+#events-message {
     font-size: 30px;
 }
 
@@ -33,7 +37,7 @@
     width: 170px;
     height: 40px;
     border-radius: 20px;
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: greenyellow;
     border: 1px solid greenyellow;
     transition: 0.5s ease-in-out;
@@ -51,7 +55,7 @@
 /* stilizzo la card degli elementi creati */
 .item-card {
     width: 95%;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,6 +65,7 @@
 }
 .item-card:hover {
     transform: scale(1.02);
+    box-shadow: 0px 0px 5px black;
 }
 
 /* stilizzo i 3 div all'interno di itemcard */
@@ -94,6 +99,7 @@
 
 /* stilizzo i bottoni "modifica" e "elimina" */
 .edit-btn {
+    font-size: 12px;
     border: 1px solid rgb(0, 85, 255);
     transition: 0.3s ease-in-out;
     border-radius: 15px;
@@ -108,6 +114,7 @@
 }
 
 .delete-btn {
+    font-size: 12px;
     border: 1px solid red;
     transition: 0.3s ease-in-out;
     border-radius: 15px;

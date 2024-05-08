@@ -3,8 +3,8 @@ const url = "https://striveschool-api.herokuapp.com/api/product/"; // definisco 
 const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`
 
 
- // verifica che il contenuto del DOM sia completamente caricato prima di eseguire la funzione.
-document.addEventListener("DOMContentLoaded", function() {
+  // verifica che il contenuto del DOM sia completamente caricato prima di eseguire la funzione.
+  document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('items-form'); //riferimento al form HTML con ID 'items-form'.
   const itemsContainer = document.getElementById('bo-items-cards');// riferimento al div con ID 'bo-items-cards' che verrà usato per visualizzare gli oggetti creati.
 
@@ -53,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('price').value = '';
   }
 
-  // creo la funzione per visualizzare un messaggio di successo una volta creato l'elemento
+  // creo le funzioni per visualizzare un messaggio in base all'evento (Creazione,Modificare,Eliminare)
   function displaySuccessMessage() {
-    const successMsg = document.getElementById('success-message'); // punto l'elemento HTML id="success-message"
+    const successMsg = document.getElementById('events-message'); // punto l'elemento HTML id="success-message"
     successMsg.textContent = "Prodotto Inserito Correttamente!"; // Imposto il messaggio di successo.
     successMsg.style.display = 'block'; // Mostra il messaggio.
   
@@ -64,6 +64,30 @@ document.addEventListener("DOMContentLoaded", function() {
         successMsg.style.display = 'none';
     }, 3000);
   }
+
+  function displayEditMessage() {
+    const successMsg = document.getElementById('events-message'); // punto l'elemento HTML id="success-message"
+    successMsg.textContent = "Prodotto Modificato Correttamente!"; // Imposto il messaggio di successo.
+    successMsg.style.display = 'block'; // Mostra il messaggio.
+  
+    // Nascondo il messaggio dopo 3 secondi
+    setTimeout(() => {
+        successMsg.style.display = 'none';
+    }, 3000);
+  }
+
+  function displayDeleteMessage() {
+    const successMsg = document.getElementById('events-message'); // punto l'elemento HTML id="success-message"
+    successMsg.textContent = "Prodotto Eliminato Correttamente!"; // Imposto il messaggio di successo.
+    successMsg.style.display = 'block'; // Mostra il messaggio.
+  
+    // Nascondo il messaggio dopo 3 secondi
+    setTimeout(() => {
+        successMsg.style.display = 'none';
+    }, 3000);
+  }
+
+
 
   // creo una funzione asincrona che accetta come parametro `itemId`, ovvero l'id dell'elemento da eliminare.
   async function deleteItem(itemId) {
@@ -78,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (response.ok) { // `response.ok` restituisce true se lo status è compreso tra 200 e 299, indicando che la richiesta è stata eseguita con successo.
         console.log('Elemento eliminato con successo'); // Loggo un messaggio nella console per indicare che l'elemento è stato eliminato con successo.
         fetchItems(); // Chiamo la funzione `fetchItems` per ricaricare e aggiornare la lista degli elementi.
+        displayDeleteMessage()
     } else {
       // Se la risposta non è riuscita, loggo un messaggio di errore nella console del browser.
         console.error('Errore nell\'eliminazione dell\'elemento'); // Questo blocco else viene eseguito se lo status della risposta non è compreso tra 200 e 299.
@@ -109,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
     if (response.ok) {
       console.log('Elemento aggiornato con successo');
+      displayEditMessage();
       fetchItems();
       // Se l'aggiornamento è riuscito, stampo un messaggio di successo, ricarico la lista degli items e chiude il modal.
   
@@ -148,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const itemCard = document.createElement('div'); // Creo un nuovo elemento div.
         itemCard.className = 'item-card'; // Assegno le classi al nuovo div.
 
+        // creo i 3 div che conterranno gli elementi per poter ottimizzare l'UI
         const itemTitle = document.createElement(`div`)
         itemTitle.className = `item-title`
         itemCard.appendChild(itemTitle)

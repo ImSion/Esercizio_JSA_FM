@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Expand at sm</a>
+              <a class="navbar-brand" href="#">Back-Office Mark-ET</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -28,13 +28,10 @@
               <div class="collapse navbar-collapse" id="navbarsExample03">
                 <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
@@ -80,10 +77,9 @@
                     <label for="prezzo">Prezzo</label>
                     <input id="price" type="text" required>
                     <button class="submitbtn" type="submit">Aggiungi +</button>
-                    <div id="success-message" style="display:none;"></div>
+                    <div id="events-message" style="display:none;"></div>
                 </form>                
             </div>
-          </div>
 
             <div id="bo-list-items" class="container-fluid text-center ">
                 <h2>Lista oggetti</h2>
@@ -91,31 +87,31 @@
                     
                 </div>               
             </div>
-
+        </div>  
             <!-- Modal -->
-          <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="modalLabel">Modifica Oggetto</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="edit-form">
-                  <div class="modal-body">
-                    <input type="text" class="form-control mb-2" id="edit-name" placeholder="Nome">
-                    <input type="text" class="form-control mb-2" id="edit-description" placeholder="Descrizione">
-                    <input type="text" class="form-control mb-2" id="edit-brand" placeholder="Marca">
-                    <input type="text" class="form-control mb-2" id="edit-imageUrl" placeholder="URL Immagine">
-                    <input type="text" class="form-control mb-2" id="edit-price" placeholder="Prezzo">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
-                  </div>
-                </form>
+        <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalLabel">Modifica Oggetto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
+              <form id="edit-form">
+                <div class="modal-body">
+                  <input type="text" class="form-control mb-2" id="edit-name" placeholder="Nome">
+                  <input type="text" class="form-control mb-2" id="edit-description" placeholder="Descrizione">
+                  <input type="text" class="form-control mb-2" id="edit-brand" placeholder="Marca">
+                  <input type="text" class="form-control mb-2" id="edit-imageUrl" placeholder="URL Immagine">
+                  <input type="text" class="form-control mb-2" id="edit-price" placeholder="Prezzo">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+                </div>
+              </form>
             </div>
           </div>
+        </div>
    
     </main>
 

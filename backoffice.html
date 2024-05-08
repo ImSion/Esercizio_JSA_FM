@@ -82,15 +82,41 @@
                     <button type="submit">Aggiungi +</button>
                 </form>                
             </div>
+          </div>
 
-            <div id="bo-list-items">
+            <div id="bo-list-items" class="container-fluid ">
                 <h2>Lista oggetti</h2>
-                <div id="bo-items-cards" class="d-flex row flex-column justify-content-center align-items-center ">
+                <div id="bo-items-cards" class="d-flex row flex-column alignse">
                     
                 </div>               
             </div>
 
-        </div>
+            <!-- Modal -->
+          <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modalLabel">Modifica Oggetto</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="edit-form">
+                  <div class="modal-body">
+                    <input type="text" class="form-control mb-2" id="edit-name" placeholder="Nome">
+                    <input type="text" class="form-control mb-2" id="edit-description" placeholder="Descrizione">
+                    <input type="text" class="form-control mb-2" id="edit-brand" placeholder="Marca">
+                    <input type="text" class="form-control mb-2" id="edit-imageUrl" placeholder="URL Immagine">
+                    <input type="text" class="form-control mb-2" id="edit-price" placeholder="Prezzo">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        
     </main>
 
 

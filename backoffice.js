@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('items-form'); //riferimento al form HTML con ID 'items-form'.
   const itemsContainer = document.getElementById('bo-items-cards');// riferimento al div con ID 'bo-items-cards' che verrà usato per visualizzare gli oggetti creati.
 
-  // Definisco una funzione asincrona per recuperare gli oggetti dal server.
+  // creo una funzione asincrona per recuperare gli oggetti dal server.
   async function fetchItems() { 
       // Effettuo una richiesta GET asincrona all'API.    
       const response = await fetch(url, { 
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
       displayItems(items);
   }
 
-  // definisco una funzione asincrona per creare un nuovo oggetto tramite POST.
+  // creo una funzione asincrona per creare un nuovo oggetto tramite POST.
   async function createItem(name, description, brand, imageUrl, price) {
       const newItem = { name, description, brand, imageUrl, price }; // Creo un oggetto con i dati da inviare al server.
       const response = await fetch(url, { // Effettuo una richiesta POST asincrona all'API.
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return response.json(); // Restituisce l'elemento creato
   }
 
-  // Definisco una funzione asincrona che accetta come parametro `itemId`, ovvero l'id dell'elemento da eliminare.
+  // creo una funzione asincrona che accetta come parametro `itemId`, ovvero l'id dell'elemento da eliminare.
   async function deleteItem(itemId) {
     // Eseguo una richiesta fetch asincrona concatenando `url` base dell'API e `itemId` per puntare specificatamente all'elemento da eliminare.
     const response = await fetch(url + itemId, { // `await` è usato per attendere che la promise restituita da fetch sia risolta prima di procedere.
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Definisco una funzione asincrona che prende un parametro `id`, ovvero l'ID dell'elemento che deve essere aggiornato.
+  // creo una funzione asincrona che prende un parametro `id`, ovvero l'ID dell'elemento che deve essere aggiornato.
   async function saveChanges(id) {
     // Crea un oggetto contenente i nuovi valori per l'item, recuperati dai campi di input presenti nel modal.
     const updatedItem = {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
       fetchItems();
       // Se l'aggiornamento è riuscito, stampo un messaggio di successo, ricarico la lista degli items e chiude il modal.
   
-      bootstrap.Modal.getInstance(document.getElementById('modalLabel')).hide();
+      bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
       // Utilizzo un metodo di Bootstrap per nascondere il modal una volta che le modifiche sono state salvate con successo.
     } else {
       console.error('Errore nell\'aggiornamento dell\'elemento');

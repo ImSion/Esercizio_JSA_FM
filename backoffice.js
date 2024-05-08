@@ -215,25 +215,63 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
         image.className = "bo-itemimg"
         itemTitle.appendChild(image);
 
-        const dropdown = document.createElement('div');
-        dropdown.className = 'dropdown';
-        itemInfo.appendChild(dropdown);
-    
-        const dropButton = document.createElement('button');
-        dropButton.className = 'btn btn-sm btn-link ';
-        dropButton.setAttribute('data-bs-toggle', 'dropdown');
-        dropButton.setAttribute('aria-expanded', 'false');
-        dropButton.textContent = 'Descrizione';
-        dropdown.appendChild(dropButton);
-    
-        const dropdownMenu = document.createElement('div');
-        dropdownMenu.className = 'dropdown-menu';
-        dropdown.appendChild(dropdownMenu);
-    
-        const description = document.createElement('p');
-        description.className = 'dropdown-item-text';
-        description.textContent = item.description;
-        dropdownMenu.appendChild(description);
+        // Creazione del bottone che apre il modale
+        const modalButton = document.createElement('button');
+        modalButton.className = 'btn descr-btn';
+        modalButton.textContent = 'Descrizione';
+        modalButton.setAttribute('data-bs-toggle', 'modal');
+        modalButton.setAttribute('data-bs-target', `#modal-${item._id}`);
+        itemInfo.appendChild(modalButton);
+
+        // Creazione del modale
+        const modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.id = `modal-${item._id}`;
+        modal.setAttribute('tabindex', '-1');
+        modal.setAttribute('aria-labelledby', `modalLabel-${item._id}`);
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(modal);  // Appendo il modale al body
+
+        // Struttura interna del modale
+        const modalDialog = document.createElement('div');
+        modalDialog.className = 'modal-dialog';
+        modal.appendChild(modalDialog);
+
+        const modalContent = document.createElement('div');
+        modalContent.className = 'modal-content';
+        modalDialog.appendChild(modalContent);
+
+        const modalHeader = document.createElement('div');
+        modalHeader.className = 'modal-header';
+        modalContent.appendChild(modalHeader);
+
+        const modalTitle = document.createElement('h5');
+        modalTitle.className = 'modal-title';
+        modalTitle.id = `modalLabel-${item._id}`;
+        modalTitle.textContent = 'Dettaglio Prodotto';
+        modalHeader.appendChild(modalTitle);
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'btn-close';
+        closeButton.setAttribute('data-bs-dismiss', 'modal');
+        closeButton.setAttribute('aria-label', 'Close');
+        modalHeader.appendChild(closeButton);
+
+        const modalBody = document.createElement('div');
+        modalBody.className = 'modal-body';
+        modalBody.textContent = item.description; // Inserisco qui la descrizione dell'item
+        modalContent.appendChild(modalBody);
+
+        const modalFooter = document.createElement('div');
+        modalFooter.className = 'modal-footer';
+        modalContent.appendChild(modalFooter);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'btn btn-secondary';
+        closeBtn.setAttribute('data-bs-dismiss', 'modal');
+        closeBtn.textContent = 'Chiudi';
+        modalFooter.appendChild(closeBtn);
+        // fine della struttura del modale
 
         const brand = document.createElement('p');
         brand.textContent = "Brand: " + item.brand;

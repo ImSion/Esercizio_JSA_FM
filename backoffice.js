@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // definisco una funzione asincrona per creare un nuovo oggetto tramite POST.
-  async function createItem(name, imageUrl, description, brand,  price) {
-      const newItem = { name, imageUrl, description, brand,  price }; // Creo un oggetto con i dati da inviare al server.
+  async function createItem(name, description, brand, imageUrl, price) {
+      const newItem = { name, description, brand, imageUrl, price }; // Creo un oggetto con i dati da inviare al server.
       const response = await fetch(url, { // Effettuo una richiesta POST asincrona all'API.
           method: 'POST',
           headers: {
@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // creo una funzione per visualizzare gli oggetti nel DOM.
   function displayItems(items) {
     itemsContainer.innerHTML = ''; // Pulisco gli elementi esistenti
+    console.log(items);
     items.forEach(item => { // Itero su ogni oggetto ricevuto.
         const itemCard = document.createElement('div'); // Creo un nuovo elemento div.
         itemCard.className = 'item-card col justify-content-center align-items-center'; // Assegno la classe 'item-card' al nuovo div.
@@ -76,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function() {
       const brand = document.getElementById('brand').value;
       const imageUrl = document.getElementById('item-img').value;
       const price = document.getElementById('price').value;
-
       const createdItem = await createItem(name, description, brand, imageUrl, price);
       console.log('Elemento creato:', createdItem);
       fetchItems(); // Aggiorna la lista degli elementi

@@ -295,7 +295,7 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
         };
         itemButtons.appendChild(editButton); // Aggiungo il bottone di modifica al div itemCard.
 
-        // Aggiungo il bottone di eliminazione
+        // creo il bottone di eliminazione
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Elimina'; 
         deleteButton.className = 'btn delete-btn'; // assegno le classi al bottone

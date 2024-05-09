@@ -43,10 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
       title.textContent = item.name;
       itemTitle.appendChild(title);
 
-      const description = document.createElement('p');
-      description.textContent = item.description;
-      itemInfo.appendChild(description);
-
       const brand = document.createElement('p');
       brand.textContent = "Brand: " + item.brand;
       itemInfo.appendChild(brand);
@@ -65,6 +61,11 @@ document.addEventListener("DOMContentLoaded", function() {
       detailsButton.className = `btn detl-btn`
       detailsButton.textContent = `dettagli`
       itemButtons.appendChild(detailsButton)
+
+      // Aggiungo un listener per il pulsante dettagli
+      detailsButton.addEventListener('click', () => {
+        window.location.href = `/detail.html?productId=${item._id}`;
+      });
 
       itemsContainer.appendChild(itemCard);
     });
@@ -143,15 +144,6 @@ document.addEventListener("DOMContentLoaded", function() {
       badges.forEach(badge => {
           if (!badge.classList.contains('badge-dnone')) {
               badge.classList.add('badge-dnone');
-          }
-      });
-  
-      // Resetta tutti i pulsanti "Aggiungi al carrello" se sono stati disabilitati
-      const buttons = document.querySelectorAll('.cart-btn');
-      buttons.forEach(button => {
-          button.textContent = "Aggiungi al carrello";
-          if (button.classList.contains('disabled')) {
-              button.classList.remove('disabled');
           }
       });
   });

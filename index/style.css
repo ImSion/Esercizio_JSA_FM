@@ -315,7 +315,7 @@ nav {
     border-radius: 5px;
     box-shadow: 0px 0px 10px black;
     background-color: rgb(97, 150, 255);
-    background-image: url(Assets/background\ title.png);
+    background-image: url(/Assets/background\ title.png);
     background-size: 200px;
     background-position: start;
     background-repeat: repeat;

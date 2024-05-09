@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Aggiungo un listener per il pulsante dettagli
       detailsButton.addEventListener('click', () => {
-        window.location.href = `/detail.html?productId=${item._id}`;
+        window.location.href = `/Detail/detail.html?productId=${item._id}`;
       });
 
       itemsContainer.appendChild(itemCard);

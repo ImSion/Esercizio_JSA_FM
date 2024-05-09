@@ -18,42 +18,64 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Back-Office Mark-ET</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-        
-              <div class="collapse navbar-collapse" id="navbarsExample03">
-                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                <form role="search">
-                  <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                </form>
-              </div>
-            </div>
-          </nav>
+      <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">BackOffice Mark-ET</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+             <ul class="navbar-nav me-auto mb-2 mb-md-0">
+               <li class="nav-item">
+                 <a class="nav-link" aria-current="page" href="index.html">Home</a>
+               </li>
+             </ul>             
+          </div>
+  
+            
+          <ul id="utilitysect" class="d-flex justify-content-between  text-center position-absolute gap-3 list-unstyled ">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                 <div class="search-wrapper">
+                   <input type="search" placeholder="Search" class="p-2" />
+                   <button class="search-btn">
+                     <i class="bi bi-search"></i>
+                   </button>
+                 </div>
+                </a>
+              </li>                
+  
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#"><i class="bi bi-bell-fill"></i></a>
+              </li>
+
+          </ul>
+  
+            <!-- sezione account user -->
+          <div id="accountsect" class="nav-item dropdown position-absolute ">
+            <a class="nav-link m-2 " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="accountimg" src="Assets/avatar-4.jpg" alt="account img">
+            </a>
+            <ul id="accountdrop" class="dropdown-menu">
+              <li><a class="dropdown-item text-white" href="#"><img class="accountimg m-1 " src="assets/avatar-4.jpg" alt=""> Geralt of Rivia</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-white" href="#"><i class="bi bi-pencil"></i>
+                Manage Profile</a></li>
+              <li><a class="dropdown-item text-white" href="#"><i class="bi bi-person-lines-fill"></i> Transfer profile</a></li>
+              <li><a class="dropdown-item text-white" href="#"><i class="bi bi-person-fill"></i> Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-white" href="#">Sign Out <i class="bi bi-box-arrow-left"></i>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
 
     <main>
         <!-- contenitore principale -->
-        <div class="container">
+        <div class="container additemgroup">
 
             <!-- contenitore per il form di creazione oggetto -->
             <div id="Create-Item" class="row text-center mt-3 justify-content-center  ">

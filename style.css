@@ -1,12 +1,135 @@
+/* inizio stile NavBar */
+nav {
+    background-color: rgb(50, 50, 50);
+}
+.navbar-brand {
+    color: black;
+    text-shadow: 0px 0px 5px rgb(97, 150, 255);
+}
+.nav-link {
+    font-size: 18px;
+    color: rgb(97, 150, 255);
+}
+#utilitysect {
+    right: 120px;
+    top: 16px;
+}
+
+/* stilizzo le icone della utility sect */
+.bi-bell-fill {
+    font-size: 20px;
+    color: rgb(97, 150, 255);
+    transition: 0.4s ease-in-out;
+}
+.bi-bell-fill:hover {
+    text-shadow: 0px 0px 10px rgb(97, 150, 255);
+}
+.mycart {
+    padding: 0;
+}
+.bi-cart {
+    font-size: 20px;
+    color: rgb(97, 150, 255);
+    padding: 0;
+}
+.bi-cart:hover:before {
+    content: "\f23d";
+    text-shadow: 0px 0px 10px rgb(97, 150, 255);
+    transition: 0.4s ease-in-out;
+
+}
+.bi-search::before {
+    font-size: 18px;
+    color: rgb(97, 150, 255);
+}
+
+/* impostazioni e animazione del pulsante search */
+.search-wrapper {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    border-radius: 4rem;
+    align-items: center;
+    justify-content: center;
+    /* background: rgb(19, 19, 19); */
+    /* border: 2px solid rgb(19, 19, 19); */
+    outline: none;
+    overflow: hidden;
+    transition: 400ms ease-in-out;
+    position: relative;
+  }
+  
+  .activesrc {
+    width: 300px;
+  }
+  .search-wrapper input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: 40px;
+    margin-right: 2px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    font-size: 22px;
+    box-sizing: border-box;
+  }
+  .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background: rgb(19, 19, 19);
+    margin-left: auto;
+    z-index: 1;
+  }
+  .search-btn i {
+    color: #fff;
+    font-size: 16px;
+  }
 
 
+/* stilizzo l'immagine del profilo (che funge anche da dropdown btn) */
+#accountsect{
+    right: 30px;
+    top: 2px;
+}
+.accountimg {
+    width: 40px;
+    border-radius: 20px;
+    position: relative;
+}
+#accountsect img:hover{
+    transition: 0.5s ease-in-out;
+    box-shadow: 0px 0px 10px rgb(97, 150, 255);
+}
 
+/* sposto il dropdown menu verso sinistra */
+#accountdrop {
+    background-color: rgb(65, 65, 65);
+    left: -120px;
+}
 
-
+.dropdown-item:hover {
+    background-color: rgb(97, 150, 255);
+    transition: 0.4s ease-in-out;
+}
+/* fine stile della navbar */
 
 
 /* inizia qui lo stile per il backoffice */
 /* stilizzo il bottone del collapse contenente il form input */
+
+.additemgroup {
+    margin-top: 70px;
+}
+
 .colapse-btn {
     font-size: 20px;
     text-align: center;
@@ -186,7 +309,7 @@
 
 /* Inizia lo stile per la pagina Home */
 .maintitle {
-    margin-top: 10px;
+    margin-top: 70px;
     width: 100%;
     height: 90px;
     border-radius: 5px;
@@ -196,7 +319,6 @@
     background-size: 200px;
     background-position: start;
     background-repeat: repeat;
-    text-shadow: 0px 0px 20px greenyellow;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -221,6 +343,7 @@
     margin-bottom: 10px;
 }
 .products-card {
+    background-color: rgb(50, 50, 50);
     max-width: 200px;
     height: 380px;
     border: 1px solid rgb(97, 150, 255);
@@ -230,7 +353,7 @@
     cursor: pointer;
 }
 .products-card:hover {
-    transform: scale(1.06);
+    transform: scale(1.04);
     box-shadow: 0px 0px 10px rgb(0, 85, 255);
 }
 .product-title{
@@ -247,7 +370,9 @@
 }
 
 .product-info p{
-    margin: 0; 
+    color: rgb(97, 150, 255);
+    margin-bottom: 0; 
+    margin-top: 8px;
     text-align: center;
 }
 
@@ -255,4 +380,131 @@
     width: 199px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+.product-btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* fine stile pagina home */
+
+
+/* stilizzo bottone carrello, carrello e i suoi elementi*/
+.cart-btn {
+    width: 60px;
+    height: 30px;
+    color: white;
+    border: 1px solid greenyellow;
+    background-color: rgb(50, 50, 50);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 0.5s ease-in-out;
+}
+.cart-btn:hover {
+    color: black;
+    background-color: greenyellow;
+    box-shadow: 0px 0px 10px rgb(97, 150, 255);
+    transform: scale(1.05);
+}
+.cart-btn.active {
+    color: black;
+    background-color: greenyellow;
+    border: 1px solid greenyellow;
+    box-shadow: 0px 0px 10px greenyellow;
+}
+
+.detl-btn {
+    width: 80px;
+    height: 30px;
+    margin-left: ;
+    color: white;
+    border: 1px solid rgb(97, 150, 255);
+    background-color: rgb(50, 50, 50);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 0.5s ease-in-out;
+}
+.detl-btn:hover {
+    color: black;
+    background-color: rgb(97, 150, 255);
+    box-shadow: 0px 0px 10px rgb(97, 150, 255);
+    transform: scale(1.05);
+}
+
+
+.modal-content {
+    background-color: rgb(50, 50, 50);
+    box-shadow: 0px 0px 5px rgb(97, 150, 255);
+}
+.modal-header {
+    color: rgb(97, 150, 255);
+}
+.btn-close {
+    color: rgb(97, 150, 255);
+}
+.buyingcart , .closingcart , .eraseorder {
+    font-size: 14px;
+    background-color: rgb(30, 30, 30);
+    color: rgb(97, 150, 255);
+    transition: 0.3s ease-in-out;
+}
+.buyingcart:hover , .closingcart:hover , .eraseorder:hover {
+    transform: scale(1.05);
+    background-color: rgb(30, 30, 30);
+    color: rgb(97, 150, 255);
+    box-shadow: 0px 0px 10px rgb(97, 150, 255);
+    text-shadow: 0px 0px 10px rgb(97, 150, 255);
+}
+#cart-totals {
+    color: rgb(97, 150, 255);
+    background-color: rgb(30, 30, 30);
+    text-align: center;
+}
+
+/* stilizzo i prodotti nel carrello */
+.cart-product-img {
+    width: 50px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.cart-product-text {
+    color: rgb(97, 150, 255);
+    margin: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* inizio media query */
+
+/* riadatto la posizione degli elementi a destra della navbar alla comparsa dell'hamburger menu */
+@media screen and (max-width: 767px) {
+    #utilitysect {
+        right: 150px;
+        top: 16px;
+    }
+    #accountsect{
+        right: 70px;
+        top: 0px;
+    }
 }

@@ -26,6 +26,7 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
   // Da qui inizia la logica di funzione del backoffice
   const form = document.getElementById('items-form'); //riferimento al form HTML con ID 'items-form'.
   const itemsContainer = document.getElementById('bo-items-cards');// riferimento al div con ID 'bo-items-cards' che verrà usato per visualizzare gli oggetti creati.
+  let allItems = [] // creo un array vuoto dove memorizzare gli items che serviranno per la funzione ricerca 
 
   // creo una funzione asincrona per recuperare gli oggetti dal server.
   async function fetchItems() { 
@@ -38,6 +39,7 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
       });
       // converto la risposta in JSON
       const items = await response.json();
+      allItems = items // memorizzo una copia degli elementi originali
       // richiamo la funzione per visualizzare gli oggetti.
       displayItems(items);
   }
@@ -301,8 +303,33 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
             deleteItem(item._id); // prendo come riferimento l'id dell'item selezionato
         };
         itemButtons.appendChild(deleteButton); // Aggiungo il bottone Elimina al div itemCard.
-
-
+        // creo la logica che consente al pulsante search di "aprirsi" quando lo si clicka
+          const search = document.querySelector(".search-wrapper");
+          const input = search.querySelector("input");
+          
+          search.addEventListener("click", () => {
+            if (!input.matches(":focus")) {
+              search.classList.add("activesrc");
+            }
+          });
+          
+          const srcInput = document.querySelector("input[type='search']");
+          
+          srcInput.addEventListener("input", () => {
+              const searchText = srcInput.value.toLowerCase(); // Ottiene il testo di ricerca e lo converte in minuscolo
+              if (searchText.length >= 2) { //comincia a filtrare dopo le prime 3 lettere inserite nell'input
+                  const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchText));
+                  displayItems(filteredItems); // Visualizza solo i prodotti filtrati
+              } else if (searchText.length === 0) {
+                  displayItems(allItems); // Visualizza tutti i prodotti se il campo di ricerca è vuoto
+              }
+          });
+          
+          search.addEventListener("mouseleave", () => {
+            if (!input.matches(":focus") && !input.value.trim()) {
+              search.classList.remove("activesrc");
+            }
+          });
 
         itemsContainer.appendChild(itemCard);
     });
@@ -319,6 +346,9 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
       console.log('Elemento creato:', createdItem);
       fetchItems(); // Aggiorno la lista degli elementi
   });
+
+  
+  
 
   
   fetchItems(); // Carico gli elementi esistenti all'avvio

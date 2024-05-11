@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (productId) {
         fetchProductDetails(productId);
     }
-    loadCart();
 });
 
 async function fetchProductDetails(productId) {
@@ -30,3 +29,9 @@ function displayProductDetails(product) {
     document.getElementById('product-price').textContent = `Prezzo: €${product.price}`;
 }
 
+// Bottoni per aggiungere il carrello e aprire il prodotto in dettaglio
+const productDetail = document.getElementById(`product-detail-container`)
+const addToCartButton = document.createElement('button');
+addToCartButton.className = 'btn cart-btn';
+addToCartButton.innerHTML = '<i class="bi bi-cart-plus"></i>';
+productDetail.appendChild(addToCartButton);

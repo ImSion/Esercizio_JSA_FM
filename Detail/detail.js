@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (productId) {
         fetchProductDetails(productId);
     }
+    loadCart();
 });
 
 async function fetchProductDetails(productId) {
@@ -28,3 +29,4 @@ function displayProductDetails(product) {
     document.getElementById('product-brand').textContent = `Brand: ${product.brand}`;
     document.getElementById('product-price').textContent = `Prezzo: €${product.price}`;
 }
+

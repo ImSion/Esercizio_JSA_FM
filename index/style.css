@@ -24,25 +24,55 @@ nav {
 .bi-bell-fill:hover {
     text-shadow: 0px 0px 10px rgb(97, 150, 255);
 }
+/* tolgo il padding dal button del carrello */
 .mycart {
     padding: 0;
 }
+/* stilizzo icona carrello */
 .bi-cart {
     font-size: 20px;
     color: rgb(97, 150, 255);
     padding: 0;
 }
+/* in hover, l'icona del carrello si "fulla" e ha un leggero effetto shadow  */
 .bi-cart:hover:before {
     content: "\f23d";
     text-shadow: 0px 0px 10px rgb(97, 150, 255);
     transition: 0.4s ease-in-out;
 
 }
+/* stilizzo icona search */
 .bi-search::before {
     font-size: 18px;
     color: rgb(97, 150, 255);
 }
 
+/* Stilizzo l'intera barra di scorrimento */
+::-webkit-scrollbar {
+    width: 8px; 
+  }
+  
+  /* Stilizzo la traccia (parte della barra dove si muove il thumb) */
+  ::-webkit-scrollbar-track {
+    background: black; 
+  }
+  
+  /* Stilizzo il thumb (la parte della barra che si muove) */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 20px;
+  }
+  
+  /* Cambio il colore del thumb al passaggio del mouse */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* applico un background gradiente */
+  body {
+    background: linear-gradient(to bottom right, rgb(255, 194, 9) 20%, rgb(174, 71, 71) 50%, rgb(255, 255, 255) 80% );
+  }
+  
 /* impostazioni e animazione del pulsante search */
 .search-wrapper {
     width: 30px;
@@ -120,7 +150,7 @@ nav {
     background-color: rgb(97, 150, 255);
     transition: 0.4s ease-in-out;
 }
-/* fine stile della navbar */
+/* fine stile della navbar e body */
 
 
 /* inizia qui lo stile per il backoffice */
@@ -169,7 +199,7 @@ nav {
     text-shadow: 0px 0px 10px rgb(0, 166, 255)
 }
 
-
+/*  imposto la transizione per l'open/close del form input */
 #createForm {
     transition: 0.4s ease-in-out;
 }
@@ -178,6 +208,7 @@ nav {
    display: flex;
    flex-direction: column;
    align-items: center;
+   background-color: white;
    transition: 0.4s ease-in-out;
    border: 0.5px solid black;
    border-radius: 15px;
@@ -210,7 +241,7 @@ nav {
     height: 40px;
     border-radius: 20px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     background-color: greenyellow;
     border: 1px solid greenyellow;
     transition: 0.5s ease-in-out;
@@ -229,6 +260,7 @@ nav {
 .item-card {
     width: 95%;
     margin-bottom: 8px;
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -275,6 +307,10 @@ nav {
 }
 .descr-btn:hover {
     box-shadow: 0px 0px 10px black;
+}
+/* stilizzo le info dentro il modale */
+.modal-descr {
+    color: white;
 }
 /* stilizzo i bottoni "modifica" e "elimina" */
 .edit-btn {
@@ -392,7 +428,7 @@ nav {
 /* fine stile pagina home */
 
 
-/* stilizzo bottone carrello, carrello e i suoi elementi*/
+/* stilizzo bottone carrello nelle card, modale carrello e i suoi elementi*/
 .cart-btn {
     width: 60px;
     height: 30px;
@@ -479,8 +515,13 @@ nav {
     color: rgb(97, 150, 255);
     margin: 6px;
 }
+/* fine stile bottone carrelo card,modale carrello ed elementi carrello */
 
-/* stilizzo la pagina detail */
+
+/* inizio stile pagina detail */
+.detailbody {
+    background: white;
+}
 .detailmain {
     display: flex;
     justify-content: center;
@@ -527,17 +568,7 @@ nav {
     transition: 0.5s ease-in-out;
 
 }
-
-
-
-
-
-
-
-
-
-
-
+/* fine stile pagina detail */
 
 
 /* inizio media query */
@@ -552,6 +583,7 @@ nav {
         right: 70px;
         top: 0px;
     }
+    /* rendo responsive il prodotto in "dettagli" */
     #product-detail-container {
         width: 500px;
         height: 700px;;
@@ -584,6 +616,7 @@ nav {
     }
 }
 
+/*  ancora media per il prodotto in dettagli */
 @media screen and (max-width: 520px) {
     #product-detail-container {
         width: 300px;
@@ -617,6 +650,7 @@ nav {
     }
 }
 
+/* media screen home per dispositivi mobile */
 @media screen and (max-width: 475px) {
     .products-card {
         max-width: 150px;
@@ -633,6 +667,35 @@ nav {
     }
     .product-title h6 {
         width: 149px;
+    }
+    .product-btns {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cart-btn {
+        margin-bottom: 10px;
+    }
+}
+
+/* media screen home per galaxy z fold 5 */
+@media screen and (max-width: 345px) {
+    .products-card {
+        max-width: 250px;
+        height: 470px;
+        margin-left: 30px;
+        margin-bottom: 30px;
+        border: 1px solid rgb(97, 150, 255);
+        border-radius: 8px;
+        transition: 0.4s ease-in-out;
+        box-shadow: 3px 3px 5px black;
+        cursor: pointer;
+    }
+    .itemimg {
+        width: 249px;
+        height: 249px;
+    }
+    .product-title h6 {
+        width: 249px;
     }
     .product-btns {
         flex-direction: column;

@@ -28,7 +28,7 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
   const itemsContainer = document.getElementById('bo-items-cards');// riferimento al div con ID 'bo-items-cards' che verrà usato per visualizzare gli oggetti creati.
   let allItems = [] // creo un array vuoto dove memorizzare gli items che serviranno per la funzione ricerca 
 
-  // creo una funzione asincrona per recuperare gli oggetti dal server.
+  // creo una funzione asincrona per collegare l'endpoint e poterlo popolare.
   async function fetchItems() { 
       // Effettuo una richiesta GET asincrona all'API.    
       const response = await fetch(url, { 
@@ -261,8 +261,12 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
 
         const modalBody = document.createElement('div');
         modalBody.className = 'modal-body';
-        modalBody.textContent = item.description; // Inserisco qui la descrizione dell'item
         modalContent.appendChild(modalBody);
+
+        const infoModalBody = document.createElement(`span`)
+        infoModalBody.className = `modal-descr`;
+        infoModalBody.textContent = item.description; // Inserisco qui la descrizione dell'item
+        modalBody.appendChild(infoModalBody)
 
         const modalFooter = document.createElement('div');
         modalFooter.className = 'modal-footer';
@@ -303,6 +307,7 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
             deleteItem(item._id); // prendo come riferimento l'id dell'item selezionato
         };
         itemButtons.appendChild(deleteButton); // Aggiungo il bottone Elimina al div itemCard.
+        
         // creo la logica che consente al pulsante search di "aprirsi" quando lo si clicka
           const search = document.querySelector(".search-wrapper");
           const input = search.querySelector("input");

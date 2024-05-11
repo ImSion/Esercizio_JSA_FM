@@ -140,12 +140,12 @@ document.addEventListener("DOMContentLoaded", function() {
       updateCartTotals(); // Aggiorna gli elementi totali e il loro prezzo totale
   
       // Trova tutti i badge "Acquistato" e li resetto se cancello l'ordine
-      const badges = document.querySelectorAll('.buybadge');
-      badges.forEach(badge => {
-          if (!badge.classList.contains('badge-dnone')) {
-              badge.classList.add('badge-dnone');
-          }
-      });
+      // Trova tutti i badge "Acquistato" e li resetto se cancello l'ordine
+    const cartButtons = document.querySelectorAll('.cart-btn');
+    cartButtons.forEach(button => {
+        button.innerHTML = '<i class="bi bi-cart-plus"></i>';
+        button.classList.remove('active'); // Rimuove la classe active per tornare allo stile normale
+    });
   });
 
   // Costruisco la funzione per la logica del search

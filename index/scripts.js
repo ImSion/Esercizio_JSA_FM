@@ -1,17 +1,29 @@
-document.addEventListener("DOMContentLoaded", function() {
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let allItems = [];
+
+document.addEventListener("DOMContentLoaded", async function() {
   const url = "https://striveschool-api.herokuapp.com/api/product/";
   const itemsContainer = document.getElementById('list-items');
   const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2MzdmMzAwMTVhZGJmNmIiLCJpYXQiOjE3MTUwNzU5ODcsImV4cCI6MTcxNjI4NTU4N30.Mn-ZTbTLpn-SPTEYW7p_M3noajZAlf8qt8QjyaatmCU`;
-  let allItems = [];
-  let cart = [];
+
+  await fetchItems();
+
+  window.addEventListener('storage', function(event) {
+    if (event.key === 'cart') {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartView();
+        updateCartTotals();
+        updateButtonStates();
+    }
+  });
+
 
   async function fetchItems() {
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${tokenAPI}` }
-    });
+    const response = await fetch(url, { headers: { Authorization: `Bearer ${tokenAPI}` } });
     const items = await response.json();
     allItems = items;
     displayItems(items);
+    updateButtonStates();
   }
 
   function displayItems(items) {
@@ -48,57 +60,65 @@ document.addEventListener("DOMContentLoaded", function() {
       itemInfo.appendChild(brand);
 
       const price = document.createElement('p');
-      price.textContent = "Prezzo: € " + item.price;
+      price.textContent = "Prezzo: €" + item.price;
       itemInfo.appendChild(price);
 
-      // Bottoni per aggiungere il carrello e aprire il prodotto in dettaglio
       const addToCartButton = document.createElement('button');
       addToCartButton.className = 'btn cart-btn';
-      addToCartButton.innerHTML = '<i class="bi bi-cart-plus"></i>';
+      addToCartButton.innerHTML = isProductInCart(item._id) ? '<i class="bi bi-cart-check-fill"></i>' : '<i class="bi bi-cart-plus"></i>';
+      addToCartButton.classList.toggle('active', isProductInCart(item._id));
+      addToCartButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        toggleCartItem(item, addToCartButton);
+      });
       itemButtons.appendChild(addToCartButton);
 
-      const detailsButton = document.createElement(`button`)
-      detailsButton.className = `btn detl-btn`
-      detailsButton.textContent = `dettagli`
-      itemButtons.appendChild(detailsButton)
-
-      // Aggiungo un listener per il pulsante dettagli
+      const detailsButton = document.createElement('button');
+      detailsButton.className = 'btn detl-btn';
+      detailsButton.textContent = 'Dettagli';
       detailsButton.addEventListener('click', () => {
         window.location.href = `/Detail/detail.html?productId=${item._id}`;
       });
+      itemButtons.appendChild(detailsButton);
 
       itemsContainer.appendChild(itemCard);
     });
-    setupCardListeners();
   }
 
-  function setupCardListeners() {
+  function toggleCartItem(item, button) {
+    const productId = item._id;
+    const isInCart = isProductInCart(productId);
+    if (!isInCart) {
+      cart.push({...item, quantity: 1});  // Aggiunge l'item al carrello
+      button.innerHTML = '<i class="bi bi-cart-check-fill"></i>';
+      button.classList.add('active');
+    } else {
+      cart = cart.filter(p => p._id !== productId);  // Rimuove l'item dal carrello
+      button.innerHTML = '<i class="bi bi-cart-plus"></i>';
+      button.classList.remove('active');
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));  // Aggiorna il localStorage
+    updateCartView();  // Aggiorna la vista del carrello
+    updateCartTotals();  // Aggiorna i totali del carrello
+  }
+  
+  function isProductInCart(productId) {
+    return cart.some(product => product._id === productId);  // Corretto da product.id a product._id
+  }
+  
+  function updateButtonStates() {
     const cartButtons = document.querySelectorAll('.cart-btn');
     cartButtons.forEach(button => {
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
-        const productId = this.closest('.products-card').dataset.productId;
-        const product = allItems.find(prod => prod._id === productId);
-  
-        let isInCart = cart.some(p => p._id === productId);
-        if (!isInCart) {
-          cart.push(product);
-          updateCartView();
-          this.innerHTML = `<i class="bi bi-cart-check-fill"></i>`;
-          this.classList.add('active');  // Aggiunge la classe active per mantenere lo stile hover
-        } else {
-          cart = cart.filter(p => p._id !== productId);
-          updateCartView();
-          this.innerHTML = '<i class="bi bi-cart-plus"></i>';
-          this.classList.remove('active');  // Rimuove la classe active per tornare allo stile normale
-        }
-      });
+      const productId = button.closest('.products-card').dataset.productId;
+      const isInCart = isProductInCart(productId);
+      button.innerHTML = isInCart ? '<i class="bi bi-cart-check-fill"></i>' : '<i class="bi bi-cart-plus"></i>';
+      button.classList.toggle('active', isInCart);
     });
   }
 
   function updateCartView() {
     let cartContainer = document.getElementById('cart');
-    cartContainer.innerHTML = "";
+    cartContainer.innerHTML = '';
     cart.forEach(product => {
       const productInCart = document.createElement('div');
       productInCart.className = 'cart-product';
@@ -121,60 +141,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
       cartContainer.appendChild(productInCart);
     });
-    updateCartTotals()
   }
 
   function updateCartTotals() {
     let totalItems = cart.length;
     let totalPrice = cart.reduce((total, item) => total + parseFloat(item.price), 0);
     let totalsDisplay = document.getElementById('cart-totals');
-    if (totalsDisplay) {  // Controlla se l'elemento esiste prima di tentare di modificare il suo contenuto
-        totalsDisplay.textContent = `Totale articoli: ${totalItems}, Prezzo Totale: ${totalPrice.toFixed(2)}€`;
-    }
-}
+    totalsDisplay.textContent = `Totale articoli: ${totalItems}, Prezzo Totale: €${totalPrice.toFixed(2)}`;
+  }
 
   const eraseOrderButton = document.querySelector('.eraseorder');
   eraseOrderButton.addEventListener('click', () => {
-      cart = []; // Svuota l'array del carrello
-      updateCartView(); // Aggiorna la visualizzazione del carrello
-      updateCartTotals(); // Aggiorna gli elementi totali e il loro prezzo totale
-  
-      // Trova tutti i badge "Acquistato" e li resetto se cancello l'ordine
-      // Trova tutti i badge "Acquistato" e li resetto se cancello l'ordine
-    const cartButtons = document.querySelectorAll('.cart-btn');
-    cartButtons.forEach(button => {
-        button.innerHTML = '<i class="bi bi-cart-plus"></i>';
-        button.classList.remove('active'); // Rimuove la classe active per tornare allo stile normale
-    });
+    cart = []; // Svuota l'array del carrello
+    localStorage.setItem('cart', JSON.stringify(cart)); // Aggiorna il localStorage
+    updateCartView(); // Aggiorna la visualizzazione del carrello
+    updateCartTotals(); // Aggiorna i totali del carrello
+    updateButtonStates(); // Aggiorna gli stati dei pulsanti
   });
-
-  // Costruisco la funzione per la logica del search
-  const search = document.querySelector(".search-wrapper");
-  const input = search.querySelector("input");
-
-  search.addEventListener("click", () => {
-    if (!input.matches(":focus")) {
-      search.classList.add("activesrc");
-    }
-  });
-
-  const srcInput = document.querySelector("input[type='search']");
-
-  srcInput.addEventListener("input", () => {
-    const searchText = srcInput.value.toLowerCase();
-    if (searchText.length >= 2) {
-      const filteredItems = allItems.filter(item => item.name.toLowerCase().includes(searchText));
-      displayItems(filteredItems);
-    } else if (searchText.length === 0) {
-      displayItems(allItems);
-    }
-  });
-
-  search.addEventListener("mouseleave", () => {
-    if (!input.matches(":focus") && !input.value.trim()) {
-      search.classList.remove("activesrc");
-    }
-  });
-
-  fetchItems();
 });

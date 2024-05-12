@@ -157,8 +157,9 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
       fetchItems();
       // Se l'aggiornamento è riuscito, stampo un messaggio di successo, ricarico la lista degli items e chiude il modal.
   
-      bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
       // Utilizzo un metodo di Bootstrap per nascondere il modal una volta che le modifiche sono state salvate con successo.
+      bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
+      
     } else {
       console.error('Errore nell\'aggiornamento dell\'elemento');
       // Se la richiesta fallisce, stampo un messaggio di errore.

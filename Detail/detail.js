@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const productDetail = document.getElementById('product-detail-container'); // Ottiene il contenitore dei dettagli del prodotto.
         const addToCartButton = document.createElement('button'); // Creo un nuovo pulsante.
         addToCartButton.className = 'btn detail-cart-btn'; // Imposto la classe CSS del pulsante.
-        const isInCart = isProductInCart(product.id); // Controllo se il prodotto è nel carrello.
+        const isInCart = isProductInCart(product._id); // Controllo se il prodotto è nel carrello.
         addToCartButton.innerHTML = isInCart ? '<i class="bi bi-cart-check-fill"></i>' : '<i class="bi bi-cart-plus"></i>'; // Imposta l'icona del pulsante in base al suo stato nel carrello.
         addToCartButton.classList.toggle('active', isInCart); // Alterno la classe 'active' basata sullo stato nel carrello.
         productDetail.appendChild(addToCartButton); // Aggiungo il pulsante al contenitore dei dettagli del prodotto.
@@ -72,13 +72,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Alterno lo stato di un prodotto nel carrello: aggiunge o rimuove.
     function toggleCartItem(product, button) {
-        const isInCart = isProductInCart(product.id); // Verifico se il prodotto è nel carrello.
+        const isInCart = isProductInCart(product._id); // Verifico se il prodotto è nel carrello.
         if (!isInCart) {
             cart.push({...product, quantity: 1}); // Aggiungo il prodotto al carrello se non c'è.
             button.innerHTML = '<i class="bi bi-cart-check-fill"></i>'; // Cambio l'icona del pulsante.
             button.classList.add('active'); // Aggiungo la classe 'active' al pulsante.
         } else {
-            cart = cart.filter(p => p.id !== product.id); // Rimuovo il prodotto dal carrello se c'è.
+            cart = cart.filter(p => p.id !== product._id); // Rimuovo il prodotto dal carrello se c'è.
             button.innerHTML = '<i class="bi bi-cart-plus"></i>'; // Reimposto l'icona del pulsante.
             button.classList.remove('active'); // Rimuovo la classe 'active' dal pulsante.
         }
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Verifico se un prodotto specifico è nel carrello.
     function isProductInCart(productId) {
-        return cart.some(product => product.id === productId); // Restituisce true se il prodotto è nel carrello.
+        return cart.some(product => product._id === productId); // Restituisce true se il prodotto è nel carrello.
     }
 
     // Aggiorno la visualizzazione del carrello sul DOM.

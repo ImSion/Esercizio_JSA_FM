@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
             cartContainer.appendChild(createCartProductElement(product)); // Aggiungo ogni prodotto nel carrello al contenitore del carrello.
         });
     }
+    updateCartView()
 
     // Creo un elemento DOM per un prodotto nel carrello.
     function createCartProductElement(product) {

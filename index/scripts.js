@@ -190,4 +190,34 @@ document.addEventListener("DOMContentLoaded", async function() {
     updateCartTotals(); // Aggiorno i totali del carrello
     updateButtonStates(); // Aggiorno gli stati dei pulsanti
   });
+
+   // Funzione di ricerca
+   const search = document.querySelector(".search-wrapper");
+   const input = search.querySelector("input");
+ 
+   search.addEventListener("click", () => {
+     if (!input.matches(":focus")) {
+       search.classList.add("activesrc");
+     }
+   });
+ 
+   const srcInput = document.querySelector("input[type='search']");
+ 
+   srcInput.addEventListener("input", () => {
+     const searchText = srcInput.value.toLowerCase();
+     if (searchText.length >= 2) {
+       const filteredItems = allItems.filter(item => item.name.toLowerCase().includes(searchText));
+       displayItems(filteredItems);
+     } else if (searchText.length === 0) {
+       displayItems(allItems);
+     }
+   });
+ 
+   search.addEventListener("mouseleave", () => {
+     if (!input.matches(":focus") && !input.value.trim()) {
+       search.classList.remove("activesrc");
+     }
+   });
+
 });
+

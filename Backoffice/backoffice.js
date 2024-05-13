@@ -339,7 +339,7 @@ const tokenAPI = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjM5ZmI5M2Q2M
 
         itemsContainer.appendChild(itemCard);
     });
-}
+  }
 
   form.addEventListener('submit', async function(event) {
       event.preventDefault(); // Previene il comportamento di default del form

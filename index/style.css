@@ -81,8 +81,6 @@ nav {
     border-radius: 4rem;
     align-items: center;
     justify-content: center;
-    /* background: rgb(19, 19, 19); */
-    /* border: 2px solid rgb(19, 19, 19); */
     outline: none;
     overflow: hidden;
     transition: 400ms ease-in-out;
@@ -641,6 +639,17 @@ nav {
     #product-price {
         font-size: 30px;
     }
+    .item-card {
+        flex-direction: column;
+    }
+    .item-btns {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .item-title{
+        margin-top: 5px;
+        transform: scale(1.2);
+    }
 }
 
 /*  ancora media per il prodotto in dettagli */
@@ -674,11 +683,12 @@ nav {
     }
     #product-price {
         font-size: 30px;
-    }
+    } 
+    
 }
 
 /* media screen home per dispositivi mobile */
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 485px) {
     .products-card {
         max-width: 150px;
         height: 380px;
@@ -702,6 +712,24 @@ nav {
     .cart-btn {
         margin-bottom: 10px;
     }
+    .maintitle {
+        margin-top: 110px;
+    }
+    /* impostazioni e animazione del pulsante search */
+
+    .src-btn {
+        position: absolute;
+        top: 50px;
+        right: -135px;
+    }
+  
+    .activesrc {
+    width: 320px;
+    }
+    .additemgroup {
+        margin-top: 100px;
+    }
+   
 }
 
 /* media screen home per galaxy z fold 5 */
@@ -730,5 +758,8 @@ nav {
     }
     .cart-btn {
         margin-bottom: 10px;
+    }
+    .activesrc {
+        width: 300px;
     }
 }

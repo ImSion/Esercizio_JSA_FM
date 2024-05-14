@@ -15,7 +15,7 @@ lo style è condiviso per tutte e 3 le aree del progetto, ed è suddiviso così 
 346 - 428 HOME
 431- 518 CARRELLO E RELATIVI BUTTONS
 521 - 598 DETAIL
-601 - 743 MEDIA QUERY 
+601 - 765 MEDIA QUERY 
 
 
 ENG: 
